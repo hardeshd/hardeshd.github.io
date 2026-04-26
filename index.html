@@ -65,7 +65,14 @@
     nav ul a.active { color: var(--accent); border-bottom: 2px solid var(--accent); padding-bottom: 2px; }
 
     .tab-section { display: none; }
-    .tab-section.active { display: block; }
+    .tab-section.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
 
     /* HERO */
     .hero {
