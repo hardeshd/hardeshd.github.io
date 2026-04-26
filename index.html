@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dr Hardesh Dhillon – Interventional Gastroenterologist</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0f2444;
+      --teal: #0e7490;
+      --teal-light: #e0f2fe;
+      --accent: #06b6d4;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --bg: #f8fafc;
+      --white: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(15, 36, 68, 0.97);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    nav .logo {
+      color: white;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+    nav ul a {
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    nav ul a:hover { color: var(--accent); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--navy) 0%, #1a4a7a 60%, #0e7490 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(6,182,212,0.15) 0%, transparent 60%);
+    }
+    .hero-content { position: relative; max-width: 760px; }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(6,182,212,0.2);
+      border: 1px solid rgba(6,182,212,0.4);
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      color: white;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .hero .title {
+      font-size: 1.1rem;
+      color: var(--accent);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      margin-bottom: 1.5rem;
+    }
+    .hero p {
+      color: rgba(255,255,255,0.75);
+      font-size: 1.05rem;
+      max-width: 620px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.75;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.75rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+    }
+    .btn-primary:hover { background: #0891b2; transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent;
+      color: white;
+      border: 1.5px solid rgba(255,255,255,0.4);
+    }
+    .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.08); }
+
+    .hero-photo {
+      width: 140px;
+      height: 175px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center 20%;
+      border: 3px solid rgba(6,182,212,0.6);
+      margin: 0 auto 1.5rem;
+      display: block;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      justify-content: center;
+      margin-top: 4rem;
+      flex-wrap: wrap;
+    }
+    .stat { text-align: center; }
+    .stat .num {
+      font-size: 2rem;
+      font-weight: 700;
+      color: white;
+      line-height: 1;
+    }
+    .stat .label {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 0.3rem;
+    }
+
+    /* SECTIONS */
+    section { padding: 5rem 2rem; }
+    .container { max-width: 1000px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      color: var(--navy);
+      margin-bottom: 1rem;
+    }
+    .section-divider {
+      width: 48px;
+      height: 3px;
+      background: var(--accent);
+      margin-bottom: 3rem;
+      border-radius: 2px;
+    }
+
+    /* ABOUT */
+    #about { background: white; }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .about-text p {
+      color: var(--muted);
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+    .affiliations {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+    .tag {
+      background: var(--teal-light);
+      color: var(--teal);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.3rem 0.8rem;
+      border-radius: 100px;
+    }
+    .about-cards { display: flex; flex-direction: column; gap: 1rem; }
+    .info-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+    }
+    .info-card h4 {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    .info-card p { font-size: 0.95rem; color: var(--text); font-weight: 500; }
+
+    /* EXPERIENCE */
+    #experience { background: var(--bg); }
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 6px; bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2.5rem;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2.45rem;
+      top: 6px;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid white;
+      box-shadow: 0 0 0 2px var(--accent);
+    }
+    .timeline-item.current::before { background: var(--navy); box-shadow: 0 0 0 2px var(--navy); }
+    .timeline-meta {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.25rem;
+    }
+    .timeline-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.2rem;
+    }
+    .timeline-org {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+    .timeline-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* SKILLS */
+    #skills { background: white; }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .skill-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .skill-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+    .skill-card span { font-size: 0.9rem; font-weight: 500; color: var(--text); }
+
+    /* RESEARCH */
+    #research { background: var(--bg); }
+    .research-list { display: flex; flex-direction: column; gap: 1.25rem; }
+    .research-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      border-left: 4px solid var(--accent);
+    }
+    .research-card.pending { border-left-color: #f59e0b; }
+    .research-year {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.4rem;
+    }
+    .research-title {
+      font-size: 0.975rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 0.4rem;
+      line-height: 1.5;
+    }
+    .research-journal {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+    .research-status {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 100px;
+      margin-bottom: 0.5rem;
+    }
+    .status-published { background: #dcfce7; color: #16a34a; }
+    .status-pending { background: #fef3c7; color: #d97706; }
+
+    /* ACHIEVEMENTS */
+    #achievements { background: white; }
+    .achievements-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+    .achievement-card {
+      background: linear-gradient(135deg, var(--navy) 0%, #1a4a7a 100%);
+      border-radius: 16px;
+      padding: 2rem;
+      color: white;
+    }
+    .achievement-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .achievement-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .achievement-card p { font-size: 0.85rem; color: rgba(255,255,255,0.65); }
+
+    /* GALLERY */
+    #gallery { background: var(--bg); }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .gallery-item {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: white;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+    .gallery-caption {
+      padding: 0.75rem 1rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    /* CONTACT */
+    #contact {
+      background: linear-gradient(135deg, var(--navy) 0%, #1a4a7a 100%);
+      text-align: center;
+    }
+    #contact .section-label { color: var(--accent); }
+    #contact .section-title { color: white; }
+    #contact .section-divider { margin: 0 auto 2rem; }
+    #contact p { color: rgba(255,255,255,0.7); margin-bottom: 2.5rem; font-size: 1rem; }
+    .contact-links {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: white;
+      text-decoration: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .contact-link:hover { background: rgba(255,255,255,0.15); transform: translateY(-1px); }
+
+    /* FOOTER */
+    footer {
+      background: #080f1a;
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 700px) {
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      nav ul { gap: 1rem; }
+      nav ul li:nth-child(n+4) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">Dr H. Dhillon</div>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <img src="extracted_0.jpg" alt="Dr Hardesh Dhillon" class="hero-photo">
+      <div class="hero-badge">Interventional Gastroenterologist</div>
+      <h1>Dr Hardesh Dhillon</h1>
+      <div class="title">FRACP · ESD · EMR · EUS/ERCP (in training)</div>
+      <p>
+        Currently completing an advanced endoscopy fellowship in EUS & ERCP at Singapore General Hospital.
+        Trained across Australia and Japan in therapeutic luminal and hepatobiliary endoscopy.
+      </p>
+      <div class="hero-btns">
+        <a href="#experience" class="btn btn-primary">View Experience</a>
+        <a href="#contact" class="btn btn-outline">Get in Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="section-label">About</div>
+      <h2 class="section-title">Profile</h2>
+      <div class="section-divider"></div>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            Dr Hardesh Dhillon is an Interventional Gastroenterologist currently completing a third advanced
+            endoscopy fellowship year at Singapore General Hospital, focusing on EUS and ERCP at one of Asia's
+            leading quaternary centres.
+          </p>
+          <p>
+            His training spans Australia and Japan — including a JSGE-scholarship-funded fellowship at Kyoto
+            Prefectural University of Medicine and advanced endoscopy roles at Northern Health, Barwon Health,
+            and Monash Health — building competency across general gastroenterology and all major therapeutic
+            luminal and hepatobiliary procedures.
+          </p>
+          <p>
+            He is an active researcher with publications in peer-reviewed journals and a strong international
+            conference presence, including oral presentations at the Australian Gastroenterology Week.
+          </p>
+          <div class="affiliations">
+            <span class="tag">GESA Member</span>
+            <span class="tag">ESGE Member</span>
+            <span class="tag">JGES Member</span>
+            <span class="tag">ACG Member</span>
+            <span class="tag">FRACP</span>
+          </div>
+        </div>
+        <div class="about-cards">
+          <div class="info-card">
+            <h4>Current Position</h4>
+            <p>EUS/ERCP Fellow · Singapore General Hospital</p>
+          </div>
+          <div class="info-card">
+            <h4>Location</h4>
+            <p>Singapore</p>
+          </div>
+          <div class="info-card">
+            <h4>Education</h4>
+            <p>MBBS (Hons) & BMedSc (Hons) · Monash University</p>
+          </div>
+          <div class="info-card">
+            <h4>Fellowship</h4>
+            <p>FRACP · Royal Australasian College of Physicians</p>
+          </div>
+          <div class="info-card">
+            <h4>Contact</h4>
+            <p>dhillonhardesh@gmail.com</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-label">Career</div>
+      <h2 class="section-title">Experience</h2>
+      <div class="section-divider"></div>
+      <div class="timeline">
+
+        <div class="timeline-item current">
+          <div class="timeline-meta">Jan 2026 – Present</div>
+          <div class="timeline-title">EUS/ERCP Fellowship</div>
+          <div class="timeline-org">Singapore General Hospital · Singapore</div>
+          <div class="timeline-desc">High volume EUS & ERCP exposure at a leading transplant-based quaternary centre servicing Singapore and a significant international population across Asia.</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-meta">Aug – Dec 2025</div>
+          <div class="timeline-title">ESD & Image Enhancement Fellowship</div>
+          <div class="timeline-org">Kyoto Prefectural University of Medicine (KPUM) · Kyoto, Japan</div>
+          <div class="timeline-desc">2025 JSGE Scholarship recipient. Hands-on training in upper and lower GI ESD at a high-volume tertiary centre, alongside research, conferences and workshops.</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-meta">Feb – Aug 2025</div>
+          <div class="timeline-title">Interventional Gastroenterologist & Endoscopy Fellow</div>
+          <div class="timeline-org">Barwon Health · Victoria</div>
+          <div class="timeline-desc">Lead endoscopist for large polyp resections (EMR), with ongoing training in ERCP and EUS.</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-meta">2024 – 2025</div>
+          <div class="timeline-title">Advanced Endoscopy Fellow</div>
+          <div class="timeline-org">Northern Health · Victoria</div>
+          <div class="timeline-desc">Sole endoscopy fellow across all advanced luminal, hepatobiliary and third-space endoscopy. Experienced in ERCP, EUS, ESD/POEM, and double balloon enteroscopy. Performed independent endoscopy lists (EMR, dilation).</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-meta">2023 – 2024</div>
+          <div class="timeline-title">2nd Year Gastroenterology Trainee</div>
+          <div class="timeline-org">Monash Health · Victoria</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-meta">2022 – 2023</div>
+          <div class="timeline-title">1st Year Gastroenterology Trainee</div>
+          <div class="timeline-org">Barwon Health · Victoria</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-meta">2019 – 2022</div>
+          <div class="timeline-title">Basic Physician Trainee (BPT 1–3)</div>
+          <div class="timeline-org">Barwon Health · Victoria</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-meta">2018</div>
+          <div class="timeline-title">Medical Internship</div>
+          <div class="timeline-org">Mackay Health · Queensland</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="container">
+      <div class="section-label">Procedures</div>
+      <h2 class="section-title">Clinical Skills</h2>
+      <div class="section-divider"></div>
+      <div class="skills-grid">
+        <div class="skill-card"><div class="skill-dot"></div><span>Gastroscopy & Colonoscopy (CONJOINT accredited)</span></div>
+        <div class="skill-card"><div class="skill-dot"></div><span>Endoscopic Mucosal Resection (EMR)</span></div>
+        <div class="skill-card"><div class="skill-dot"></div><span>Endoscopic Submucosal Dissection (ESD)</span></div>
+        <div class="skill-card"><div class="skill-dot"></div><span>Endoscopic Ultrasound (EUS)</span></div>
+        <div class="skill-card"><div class="skill-dot"></div><span>ERCP</span></div>
+        <div class="skill-card"><div class="skill-dot"></div><span>Full Thickness Resection</span></div>
+        <div class="skill-card"><div class="skill-dot"></div><span>Double Balloon Enteroscopy</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section id="research">
+    <div class="container">
+      <div class="section-label">Publications</div>
+      <h2 class="section-title">Research</h2>
+      <div class="section-divider"></div>
+      <div class="research-list">
+
+        <div class="research-card">
+          <span class="research-status status-published">Published</span>
+          <div class="research-year">2025</div>
+          <div class="research-title">Enhanced Submucosal Visualization Using Amber-Red Color Imaging During Gel-Immersion Colorectal Endoscopic Submucosal Dissection</div>
+          <div class="research-journal">Endoscopy · December 2025 · DOI: 10.1055/a-2749-3277</div>
+        </div>
+
+        <div class="research-card">
+          <span class="research-status status-published">Published</span>
+          <div class="research-year">2025</div>
+          <div class="research-title">Traction Device–Assisted Complete Closure to Prevent Colorectal Post-ESD Coagulation Syndrome</div>
+          <div class="research-journal">Digestive Diseases and Sciences · DOI: 10.1007/s10620-025-09650-3</div>
+        </div>
+
+        <div class="research-card">
+          <span class="research-status status-published">Published</span>
+          <div class="research-year">2024</div>
+          <div class="research-title">A proposed management strategy for oesophageal food bolus impactions — a multicenter retrospective review of 750 adult patients over a decade</div>
+          <div class="research-journal">Internal Medicine Journal · DOI: 10.1111/imj.70185</div>
+        </div>
+
+        <div class="research-card">
+          <span class="research-status status-published">Published</span>
+          <div class="research-year">2023</div>
+          <div class="research-title">Case Report: Severe hepatitis complicating olmesartan enteropathy</div>
+          <div class="research-journal">Case Reports in Gastroenterology · DOI: 10.1159/000538552</div>
+        </div>
+
+        <div class="research-card">
+          <span class="research-status status-published">Published</span>
+          <div class="research-year">2021</div>
+          <div class="research-title">Case Report: A neuroendocrine cause for refractory symptoms in coeliac disease</div>
+          <div class="research-journal">Journal of Gastroenterology and Hepatology Open · DOI: 10.1002/jgh3.12664</div>
+        </div>
+
+        <div class="research-card">
+          <span class="research-status status-published">Published</span>
+          <div class="research-year">2018</div>
+          <div class="research-title">Quality of life and associated factors among primary care Asian patients with Type 2 Diabetes Mellitus</div>
+          <div class="research-journal">International Journal of Environmental Research and Public Health · DOI: 10.3390/ijerph16193561</div>
+        </div>
+
+        <div class="research-card pending">
+          <span class="research-status status-pending">Pending</span>
+          <div class="research-year">2025</div>
+          <div class="research-title">Predictors of Inadequate Bowel Preparation and Development of a Risk-Adapted Preparation Strategy</div>
+          <div class="research-journal">Accepted abstract — DDW 2025</div>
+        </div>
+
+        <div class="research-card pending">
+          <span class="research-status status-pending">Pending</span>
+          <div class="research-year">2025</div>
+          <div class="research-title">Managing Challenging Fibrotic Colorectal Lesions: Efficacy of Gel Immersion ESD</div>
+          <div class="research-journal">Accepted abstract — ESGE Days · H. Dhillon, N. Yoshida et al.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ACHIEVEMENTS -->
+  <section id="achievements">
+    <div class="container">
+      <div class="section-label">Recognition</div>
+      <h2 class="section-title">Achievements</h2>
+      <div class="section-divider"></div>
+      <div class="achievements-grid">
+        <div class="achievement-card">
+          <div class="achievement-icon">🏆</div>
+          <h3>JSGE Scholarship 2025</h3>
+          <p>Japanese Society of Gastroenterology scholarship for ESD fellowship at Kyoto Prefectural University of Medicine</p>
+        </div>
+        <div class="achievement-card">
+          <div class="achievement-icon">✈️</div>
+          <h3>UEGW 2023 Travel Grant</h3>
+          <p>Best clinical abstract award at the United European Gastroenterology Week, Copenhagen</p>
+        </div>
+        <div class="achievement-card">
+          <div class="achievement-icon">🎓</div>
+          <h3>Most Outstanding Student</h3>
+          <p>Monash University Faculty Award — MBBS (Honours) 2012–2016</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery">
+    <div class="container">
+      <div class="section-label">In Action</div>
+      <h2 class="section-title">Gallery</h2>
+      <div class="section-divider"></div>
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="gallery1.jpg" alt="ESD procedure Kyoto">
+          <div class="gallery-caption">Performing ESD with the team at Kyoto Prefectural University of Medicine, Japan · 2025</div>
+        </div>
+        <div class="gallery-item">
+          <img src="gallery2.jpg" alt="ESD procedure endoscopy screen">
+          <div class="gallery-caption">ESD procedure under gel-immersion — endoscopic view on screen, Kyoto · 2025</div>
+        </div>
+        <div class="gallery-item">
+          <img src="gallery3.jpg" alt="Successful ESD resection thumbs up">
+          <div class="gallery-caption">Celebrating a successful ESD resection with colleagues, Kyoto · 2025</div>
+        </div>
+        <div class="gallery-item">
+          <img src="gallery5.jpg" alt="JDDW formal group photo">
+          <div class="gallery-caption">Japan Digestive Disease Week (JDDW), Japan · 2025</div>
+        </div>
+        <div class="gallery-item">
+          <img src="gallery6.jpg" alt="JDDW conference with Professor Sano">
+          <div class="gallery-caption">With Professor Sano and colleagues at JDDW, Japan · 2025</div>
+        </div>
+        <div class="gallery-item">
+          <img src="gallery7.jpg" alt="ESD procedure with team observing">
+          <div class="gallery-caption">Independent ESD procedure with the team, Kyoto · 2025</div>
+        </div>
+        <div class="gallery-item">
+          <img src="gallery8.jpg" alt="ESD procedure with Dr Osamu Dohi">
+          <div class="gallery-caption">Performing ESD with Dr Osamu Dohi, mentor from KPUM · 2025</div>
+        </div>
+        <div class="gallery-item">
+          <img src="gallery9.jpg" alt="KPUM team at JGES 2025">
+          <div class="gallery-caption">KPUM team at JGES 2025</div>
+        </div>
+        <div class="gallery-item">
+          <img src="gallery10.jpg" alt="Colorectal ESD team at KPUM">
+          <div class="gallery-caption">Colorectal ESD team at KPUM with Dr Ken Inoue & Dr Reo Kobayashi · 2025</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-label">Get in Touch</div>
+      <h2 class="section-title">Contact</h2>
+      <div class="section-divider"></div>
+      <p>Open to academic collaborations, fellowship enquiries, and speaking opportunities.</p>
+      <div class="contact-links">
+        <a href="mailto:dhillonhardesh@gmail.com" class="contact-link">
+          ✉️ dhillonhardesh@gmail.com
+        </a>
+<a href="https://github.com/hardeshdhillon92" class="contact-link">
+          GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Dr Hardesh Dhillon · Interventional Gastroenterologist</p>
+  </footer>
+
+</body>
+</html>
