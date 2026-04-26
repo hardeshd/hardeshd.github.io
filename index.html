@@ -413,6 +413,100 @@
       line-height: 1.5;
     }
 
+    /* PATIENT INFO */
+    #patientinfo { background: var(--bg); }
+    .pi-list { display: flex; flex-direction: column; gap: 1rem; }
+    .pi-card { background: white; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+    .pi-header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.1rem 1.5rem; cursor: pointer; font-weight: 600;
+      font-size: 1rem; color: var(--navy); transition: background 0.2s;
+    }
+    .pi-header:hover { background: var(--teal-light); }
+    .pi-arrow { font-size: 1.2rem; color: var(--accent); transition: transform 0.3s; }
+    .pi-header.open .pi-arrow { transform: rotate(180deg); }
+    .pi-body {
+      display: none; padding: 0 1.5rem 1.5rem;
+      gap: 2rem; grid-template-columns: 180px 1fr 1fr;
+    }
+    .pi-body.open { display: grid; }
+    .pi-icon { text-align: center; padding: 1rem 0 0.5rem; font-size: 3.5rem; }
+    .pi-col h4 {
+      font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--muted); margin: 1rem 0 0.5rem;
+    }
+    .pi-col p { font-size: 0.9rem; color: var(--text); line-height: 1.7; }
+    .pi-col ul { padding-left: 1.2rem; }
+    .pi-col ul li { font-size: 0.9rem; color: var(--text); line-height: 1.8; }
+    .pi-risks h4 { color: #b45309; }
+    .pi-risks ul li { color: var(--muted); }
+    .pi-graphic { text-align: center; padding: 1.5rem 0 0.5rem; }
+    .pi-graphic svg { width: 100%; max-width: 220px; height: auto; }
+    @media (max-width: 700px) { .pi-body.open { grid-template-columns: 1fr; } .pi-graphic { display: none; } }
+
+    /* MODAL */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: white;
+      border-radius: 16px;
+      max-width: 540px;
+      width: 100%;
+      padding: 2rem;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    .modal-close {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      background: var(--bg);
+      border: none;
+      border-radius: 50%;
+      width: 32px; height: 32px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      color: var(--muted);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .modal-close:hover { background: var(--border); }
+    .modal-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.4rem;
+    }
+    .modal h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--navy);
+      margin-bottom: 1rem;
+    }
+    .modal-section { margin-bottom: 1rem; }
+    .modal-section h4 {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+    .modal-section p { font-size: 0.92rem; color: var(--text); line-height: 1.7; }
+    .modal-section ul { padding-left: 1.2rem; }
+    .modal-section ul li { font-size: 0.92rem; color: var(--text); line-height: 1.8; }
+    .skill-card { cursor: pointer; transition: all 0.2s; }
+    .skill-card:hover { border-color: var(--accent); background: var(--teal-light); transform: translateY(-2px); }
+
     /* CONTACT */
     #contact {
       background: linear-gradient(135deg, var(--navy) 0%, #1a4a7a 100%);
@@ -469,6 +563,7 @@
       <li><a onclick="showTab('experience')">Experience</a></li>
       <li><a onclick="showTab('skills')">Skills</a></li>
       <li><a onclick="showTab('research')">Research & Achievements</a></li>
+      <li><a onclick="showTab('patientinfo')">Patient Information</a></li>
       <li><a onclick="showTab('gallery')">Gallery</a></li>
       <li><a onclick="showTab('contact')">Contact</a></li>
     </ul>
@@ -620,13 +715,13 @@
       <h2 class="section-title">Clinical Skills</h2>
       <div class="section-divider"></div>
       <div class="skills-grid">
-        <div class="skill-card"><div class="skill-dot"></div><span>Gastroscopy & Colonoscopy (CONJOINT accredited)</span></div>
-        <div class="skill-card"><div class="skill-dot"></div><span>Endoscopic Mucosal Resection (EMR)</span></div>
-        <div class="skill-card"><div class="skill-dot"></div><span>Endoscopic Submucosal Dissection (ESD)</span></div>
-        <div class="skill-card"><div class="skill-dot"></div><span>Endoscopic Ultrasound (EUS)</span></div>
-        <div class="skill-card"><div class="skill-dot"></div><span>ERCP</span></div>
-        <div class="skill-card"><div class="skill-dot"></div><span>Full Thickness Resection</span></div>
-        <div class="skill-card"><div class="skill-dot"></div><span>Double Balloon Enteroscopy</span></div>
+        <div class="skill-card" onclick="openModal('gastro')"><div class="skill-dot"></div><span>Gastroscopy & Colonoscopy</span></div>
+        <div class="skill-card" onclick="openModal('emr')"><div class="skill-dot"></div><span>Endoscopic Mucosal Resection (EMR)</span></div>
+        <div class="skill-card" onclick="openModal('esd')"><div class="skill-dot"></div><span>Endoscopic Submucosal Dissection (ESD)</span></div>
+        <div class="skill-card" onclick="openModal('eus')"><div class="skill-dot"></div><span>Endoscopic Ultrasound (EUS)</span></div>
+        <div class="skill-card" onclick="openModal('ercp')"><div class="skill-dot"></div><span>ERCP</span></div>
+        <div class="skill-card" onclick="openModal('ftr')"><div class="skill-dot"></div><span>Full Thickness Resection</span></div>
+        <div class="skill-card" onclick="openModal('dbe')"><div class="skill-dot"></div><span>Double Balloon Enteroscopy</span></div>
       </div>
     </div>
   </section>
@@ -720,6 +815,361 @@
     </div>
   </section>
 
+  <!-- PATIENT INFORMATION -->
+  <section id="patientinfo" class="tab-section">
+    <div class="container">
+      <div class="section-label">For Patients</div>
+      <h2 class="section-title">Patient Information</h2>
+      <div class="section-divider"></div>
+      <p style="color:var(--muted);margin-bottom:2.5rem;font-size:0.95rem;line-height:1.8;">The following information is intended to help you understand the procedures performed by Dr Dhillon. Please discuss any questions or concerns with your doctor before your procedure.</p>
+
+      <div class="pi-list">
+
+        <div class="pi-card">
+          <div class="pi-header" onclick="togglePI(this)">
+            <span>Gastroscopy &amp; Colonoscopy</span><span class="pi-arrow">▾</span>
+          </div>
+          <div class="pi-body">
+            <div class="pi-graphic">
+              <svg viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg">
+                <!-- Patient lying down -->
+                <ellipse cx="90" cy="60" rx="22" ry="22" fill="#f0c9a0" stroke="#c8a07a" stroke-width="1.5"/>
+                <rect x="50" y="80" width="80" height="40" rx="12" fill="#a8d0e6" stroke="#6aadcc" stroke-width="1.5"/>
+                <rect x="50" y="118" width="30" height="50" rx="8" fill="#a8d0e6" stroke="#6aadcc" stroke-width="1.5"/>
+                <rect x="100" y="118" width="30" height="50" rx="8" fill="#a8d0e6" stroke="#6aadcc" stroke-width="1.5"/>
+                <!-- Endoscope -->
+                <path d="M 10 30 Q 60 30 70 70 Q 75 90 80 100" stroke="#0e7490" stroke-width="4" fill="none" stroke-linecap="round"/>
+                <circle cx="80" cy="103" r="6" fill="#0e7490"/>
+                <circle cx="80" cy="103" r="3" fill="#fff"/>
+                <!-- Screen -->
+                <rect x="120" y="20" width="50" height="38" rx="5" fill="#1e293b" stroke="#0e7490" stroke-width="1.5"/>
+                <ellipse cx="145" cy="39" rx="16" ry="12" fill="#0e7490" opacity="0.5"/>
+                <circle cx="145" cy="39" r="6" fill="#06b6d4" opacity="0.8"/>
+                <rect x="138" y="58" width="14" height="8" rx="2" fill="#1e293b"/>
+              </svg>
+              <p style="font-size:0.72rem;color:var(--muted);margin-top:0.5rem;">Upper &amp; lower GI endoscopy</p>
+            </div>
+            <div class="pi-col">
+              <h4>What is it?</h4>
+              <p>Gastroscopy uses a thin flexible camera to examine the oesophagus, stomach, and duodenum. Colonoscopy examines the large bowel. Both are performed under sedation and are safe, well-tolerated procedures.</p>
+              <h4>Common Indications</h4>
+              <ul>
+                <li>Heartburn, reflux or indigestion</li>
+                <li>Difficulty swallowing</li>
+                <li>Abdominal pain or bloating</li>
+                <li>Unexplained iron deficiency or anaemia</li>
+                <li>Rectal bleeding or change in bowel habits</li>
+                <li>Bowel cancer screening and surveillance</li>
+                <li>Polyp detection and removal</li>
+              </ul>
+            </div>
+            <div class="pi-col pi-risks">
+              <h4>Risks</h4>
+              <ul>
+                <li>Bleeding (rare, usually minor)</li>
+                <li>Perforation of the bowel wall (very rare, &lt;1 in 1000)</li>
+                <li>Reaction to sedation medications</li>
+                <li>Aspiration (inhaling stomach contents)</li>
+                <li>Missed lesions in a small proportion of cases</li>
+                <li>Temporary bloating or discomfort after the procedure</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="pi-card">
+          <div class="pi-header" onclick="togglePI(this)">
+            <span>Endoscopic Mucosal Resection (EMR)</span><span class="pi-arrow">▾</span>
+          </div>
+          <div class="pi-body">
+            <div class="pi-graphic">
+              <svg viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg">
+                <!-- Bowel wall layers -->
+                <rect x="20" y="80" width="140" height="18" rx="4" fill="#f0c9a0" stroke="#c8a07a" stroke-width="1.2"/>
+                <rect x="20" y="98" width="140" height="14" rx="0" fill="#e8a87c" stroke="#c8a07a" stroke-width="1.2"/>
+                <rect x="20" y="112" width="140" height="18" rx="4" fill="#d4956a" stroke="#b07040" stroke-width="1.2"/>
+                <!-- Polyp lifted by fluid -->
+                <ellipse cx="90" cy="75" rx="28" ry="14" fill="#e8a87c" stroke="#c8a07a" stroke-width="1.5"/>
+                <ellipse cx="90" cy="62" rx="20" ry="13" fill="#f08080" stroke="#c05050" stroke-width="1.5"/>
+                <!-- Fluid injection -->
+                <path d="M 90 98 Q 90 88 90 80" stroke="#06b6d4" stroke-width="3" stroke-dasharray="4 2" fill="none"/>
+                <text x="100" y="95" font-size="9" fill="#0e7490">fluid</text>
+                <!-- Snare -->
+                <ellipse cx="90" cy="62" rx="22" ry="15" fill="none" stroke="#0e7490" stroke-width="2.5" stroke-dasharray="5 3"/>
+                <line x1="112" y1="55" x2="140" y2="30" stroke="#0e7490" stroke-width="2.5"/>
+                <text x="30" y="150" font-size="10" fill="var(--navy)" font-weight="600">Snare captures polyp</text>
+                <text x="30" y="165" font-size="9" fill="var(--muted)">after fluid injection</text>
+              </svg>
+              <p style="font-size:0.72rem;color:var(--muted);margin-top:0.5rem;">Lift and snare technique</p>
+            </div>
+            <div class="pi-col">
+              <h4>What is it?</h4>
+              <p>EMR is a minimally invasive technique to remove larger polyps or early cancers from the lining of the digestive tract without surgery. Fluid is injected beneath the lesion to lift it, then a snare is used to remove it.</p>
+              <h4>Common Indications</h4>
+              <ul>
+                <li>Large bowel polyps not removable by standard techniques</li>
+                <li>Early colorectal cancer</li>
+                <li>Barrett's oesophagus with dysplasia</li>
+                <li>Early gastric lesions</li>
+                <li>Flat or sessile polyps</li>
+              </ul>
+            </div>
+            <div class="pi-col pi-risks">
+              <h4>Risks</h4>
+              <ul>
+                <li>Bleeding — immediate or delayed (5–10%)</li>
+                <li>Perforation (&lt;1%)</li>
+                <li>Incomplete resection requiring further treatment</li>
+                <li>Recurrence at the resection site</li>
+                <li>Post-polypectomy syndrome (fever, pain without perforation)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="pi-card">
+          <div class="pi-header" onclick="togglePI(this)">
+            <span>Endoscopic Submucosal Dissection (ESD)</span><span class="pi-arrow">▾</span>
+          </div>
+          <div class="pi-body">
+            <div class="pi-graphic">
+              <svg viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg">
+                <!-- Bowel wall -->
+                <rect x="20" y="85" width="140" height="16" rx="4" fill="#f0c9a0" stroke="#c8a07a" stroke-width="1.2"/>
+                <rect x="20" y="101" width="140" height="14" rx="0" fill="#e8a87c" stroke="#c8a07a" stroke-width="1.2"/>
+                <rect x="20" y="115" width="140" height="16" rx="4" fill="#d4956a" stroke="#b07040" stroke-width="1.2"/>
+                <!-- Lesion en bloc -->
+                <ellipse cx="90" cy="72" rx="40" ry="18" fill="#f08080" stroke="#c05050" stroke-width="2"/>
+                <text x="72" y="76" font-size="9" fill="white" font-weight="700">lesion</text>
+                <!-- ESD knife -->
+                <line x1="130" y1="40" x2="115" y2="75" stroke="#1e293b" stroke-width="3" stroke-linecap="round"/>
+                <path d="M 115 75 L 108 82 L 118 78 Z" fill="#0e7490"/>
+                <!-- Dissection line -->
+                <path d="M 50 85 Q 90 78 130 85" stroke="#0e7490" stroke-width="2" stroke-dasharray="4 2" fill="none"/>
+                <text x="28" y="155" font-size="10" fill="var(--navy)" font-weight="600">En bloc knife dissection</text>
+                <text x="28" y="170" font-size="9" fill="var(--muted)">beneath the lesion</text>
+              </svg>
+              <p style="font-size:0.72rem;color:var(--muted);margin-top:0.5rem;">En bloc knife dissection</p>
+            </div>
+            <div class="pi-col">
+              <h4>What is it?</h4>
+              <p>ESD is an advanced technique that allows removal of large or complex lesions in one piece (en bloc) using specialised electrosurgical knives. It offers lower recurrence rates than EMR for large lesions.</p>
+              <h4>Common Indications</h4>
+              <ul>
+                <li>Early gastric cancer</li>
+                <li>Early colorectal cancer</li>
+                <li>Large or fibrotic polyps not suitable for EMR</li>
+                <li>Early oesophageal lesions</li>
+                <li>Lesions requiring en bloc resection for accurate pathology</li>
+              </ul>
+            </div>
+            <div class="pi-col pi-risks">
+              <h4>Risks</h4>
+              <ul>
+                <li>Bleeding (~5%)</li>
+                <li>Perforation (~5%), usually managed endoscopically</li>
+                <li>Stricture formation (particularly oesophageal ESD)</li>
+                <li>Longer procedure time and anaesthetic exposure</li>
+                <li>Requires hospitalisation for observation</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="pi-card">
+          <div class="pi-header" onclick="togglePI(this)">
+            <span>Endoscopic Ultrasound (EUS)</span><span class="pi-arrow">▾</span>
+          </div>
+          <div class="pi-body">
+            <div class="pi-graphic">
+              <svg viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg">
+                <!-- Stomach wall -->
+                <path d="M 30 90 Q 90 70 150 90 L 150 120 Q 90 140 30 120 Z" fill="#f0c9a0" stroke="#c8a07a" stroke-width="1.5"/>
+                <!-- Ultrasound probe tip -->
+                <rect x="75" y="55" width="30" height="45" rx="8" fill="#1e293b" stroke="#0e7490" stroke-width="1.5"/>
+                <ellipse cx="90" cy="100" rx="12" ry="6" fill="#0e7490"/>
+                <!-- Ultrasound waves -->
+                <path d="M 90 106 Q 70 130 55 155" stroke="#06b6d4" stroke-width="1.5" fill="none" opacity="0.7" stroke-dasharray="3 2"/>
+                <path d="M 90 106 Q 90 135 90 160" stroke="#06b6d4" stroke-width="1.5" fill="none" opacity="0.7" stroke-dasharray="3 2"/>
+                <path d="M 90 106 Q 110 130 125 155" stroke="#06b6d4" stroke-width="1.5" fill="none" opacity="0.7" stroke-dasharray="3 2"/>
+                <!-- Pancreas -->
+                <ellipse cx="90" cy="165" rx="35" ry="12" fill="#fde68a" stroke="#f59e0b" stroke-width="1.5"/>
+                <text x="70" y="169" font-size="8" fill="#92400e">pancreas</text>
+              </svg>
+              <p style="font-size:0.72rem;color:var(--muted);margin-top:0.5rem;">Ultrasound from inside the gut</p>
+            </div>
+            <div class="pi-col">
+              <h4>What is it?</h4>
+              <p>EUS combines endoscopy with high-frequency ultrasound to produce detailed images of the digestive tract and nearby organs including the pancreas, bile ducts, and lymph nodes. It can also perform guided biopsies (FNA/FNB).</p>
+              <h4>Common Indications</h4>
+              <ul>
+                <li>Pancreatic cysts and masses</li>
+                <li>Bile duct stones</li>
+                <li>Submucosal tumours</li>
+                <li>Lymph node assessment</li>
+                <li>Staging of gastrointestinal cancers</li>
+                <li>Evaluation of unexplained abdominal pain</li>
+              </ul>
+            </div>
+            <div class="pi-col pi-risks">
+              <h4>Risks</h4>
+              <ul>
+                <li>Bleeding (rare)</li>
+                <li>Perforation (very rare)</li>
+                <li>Pancreatitis if FNA of pancreatic lesion (~1–2%)</li>
+                <li>Infection (rare, prophylactic antibiotics given for cyst FNA)</li>
+                <li>Sedation-related risks</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="pi-card">
+          <div class="pi-header" onclick="togglePI(this)">
+            <span>ERCP</span><span class="pi-arrow">▾</span>
+          </div>
+          <div class="pi-body">
+            <div class="pi-graphic">
+              <svg viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg">
+                <!-- Liver -->
+                <path d="M 20 40 Q 90 20 130 50 Q 120 90 80 95 Q 40 90 20 40 Z" fill="#d4a574" stroke="#b08050" stroke-width="1.5"/>
+                <text x="60" y="65" font-size="9" fill="white" font-weight="600">liver</text>
+                <!-- Bile duct -->
+                <path d="M 80 95 L 80 145" stroke="#f59e0b" stroke-width="8" stroke-linecap="round"/>
+                <!-- Stone in duct -->
+                <ellipse cx="80" cy="125" rx="7" ry="5" fill="#1e293b"/>
+                <!-- Duodenum -->
+                <path d="M 60 145 Q 80 155 100 145 L 100 165 Q 80 175 60 165 Z" fill="#f0c9a0" stroke="#c8a07a" stroke-width="1.5"/>
+                <!-- Scope -->
+                <path d="M 150 30 Q 130 80 105 145" stroke="#0e7490" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                <circle cx="105" cy="148" r="5" fill="#0e7490"/>
+                <text x="55" y="190" font-size="9" fill="var(--muted)">stone removal / stent</text>
+              </svg>
+              <p style="font-size:0.72rem;color:var(--muted);margin-top:0.5rem;">Bile duct access &amp; treatment</p>
+            </div>
+            <div class="pi-col">
+              <h4>What is it?</h4>
+              <p>Endoscopic Retrograde Cholangiopancreatography (ERCP) combines endoscopy and X-ray to diagnose and treat conditions of the bile ducts and pancreatic duct, including stone removal and stent placement, without open surgery.</p>
+              <h4>Common Indications</h4>
+              <ul>
+                <li>Bile duct stones causing jaundice or pancreatitis</li>
+                <li>Biliary obstruction or stricture</li>
+                <li>Unexplained jaundice</li>
+                <li>Bile duct stent placement</li>
+                <li>Post-surgical bile duct complications</li>
+                <li>Chronic pancreatitis with duct dilation</li>
+              </ul>
+            </div>
+            <div class="pi-col pi-risks">
+              <h4>Risks</h4>
+              <ul>
+                <li>Post-ERCP pancreatitis (3–5%, most cases mild)</li>
+                <li>Bleeding after sphincterotomy (~1–2%)</li>
+                <li>Perforation (&lt;1%)</li>
+                <li>Cholangitis or infection (1–3%)</li>
+                <li>Contrast dye reaction (rare)</li>
+                <li>Stent migration or blockage (if stent placed)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="pi-card">
+          <div class="pi-header" onclick="togglePI(this)">
+            <span>Full Thickness Resection</span><span class="pi-arrow">▾</span>
+          </div>
+          <div class="pi-body">
+            <div class="pi-graphic">
+              <svg viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg">
+                <!-- All bowel wall layers -->
+                <rect x="20" y="70" width="140" height="14" rx="3" fill="#f0c9a0" stroke="#c8a07a" stroke-width="1.2"/>
+                <rect x="20" y="84" width="140" height="12" rx="0" fill="#e8a87c" stroke="#c8a07a" stroke-width="1.2"/>
+                <rect x="20" y="96" width="140" height="12" rx="0" fill="#d4956a" stroke="#b07040" stroke-width="1.2"/>
+                <rect x="20" y="108" width="140" height="14" rx="3" fill="#c07840" stroke="#a06030" stroke-width="1.2"/>
+                <!-- Lesion -->
+                <ellipse cx="90" cy="60" rx="25" ry="14" fill="#f08080" stroke="#c05050" stroke-width="2"/>
+                <text x="76" y="64" font-size="9" fill="white" font-weight="700">lesion</text>
+                <!-- FTRD clip -->
+                <path d="M 65 122 L 65 145 Q 90 155 115 145 L 115 122" stroke="#0e7490" stroke-width="3" fill="none" stroke-linecap="round"/>
+                <ellipse cx="90" cy="122" rx="25" ry="6" fill="#0e7490" opacity="0.3" stroke="#0e7490" stroke-width="2"/>
+                <text x="55" y="172" font-size="9" fill="var(--muted)">FTRD clip all layers</text>
+              </svg>
+              <p style="font-size:0.72rem;color:var(--muted);margin-top:0.5rem;">Full wall clip &amp; resection</p>
+            </div>
+            <div class="pi-col">
+              <h4>What is it?</h4>
+              <p>Full Thickness Resection (FTR) removes all layers of the bowel wall to treat lesions that cannot be safely removed by conventional methods. A specialised over-the-scope device (FTRD) clips and resects the lesion in one step.</p>
+              <h4>Common Indications</h4>
+              <ul>
+                <li>Difficult polyps at previous resection sites with scarring</li>
+                <li>Submucosal tumours</li>
+                <li>Appendiceal orifice lesions</li>
+                <li>Non-lifting polyps after prior EMR</li>
+                <li>T1 colorectal cancers in select cases</li>
+              </ul>
+            </div>
+            <div class="pi-col pi-risks">
+              <h4>Risks</h4>
+              <ul>
+                <li>Bleeding (uncommon)</li>
+                <li>Perforation (contained by the clip in most cases)</li>
+                <li>Incomplete resection</li>
+                <li>Post-procedural pain or fever</li>
+                <li>Clip-related complications (rare)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="pi-card">
+          <div class="pi-header" onclick="togglePI(this)">
+            <span>Double Balloon Enteroscopy</span><span class="pi-arrow">▾</span>
+          </div>
+          <div class="pi-body">
+            <div class="pi-graphic">
+              <svg viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg">
+                <!-- Small bowel loops -->
+                <path d="M 30 60 Q 90 40 150 60 Q 150 90 90 90 Q 30 90 30 120 Q 30 150 90 150 Q 150 150 150 120" stroke="#f0c9a0" stroke-width="14" fill="none" stroke-linecap="round"/>
+                <path d="M 30 60 Q 90 40 150 60 Q 150 90 90 90 Q 30 90 30 120 Q 30 150 90 150 Q 150 150 150 120" stroke="#e8a87c" stroke-width="10" fill="none" stroke-linecap="round"/>
+                <!-- Scope shaft -->
+                <path d="M 10 30 Q 40 50 55 65" stroke="#1e293b" stroke-width="4" fill="none" stroke-linecap="round"/>
+                <!-- Balloon 1 -->
+                <ellipse cx="68" cy="72" rx="14" ry="9" fill="#06b6d4" opacity="0.7" stroke="#0e7490" stroke-width="1.5"/>
+                <!-- Balloon 2 -->
+                <ellipse cx="92" cy="90" rx="14" ry="9" fill="#06b6d4" opacity="0.4" stroke="#0e7490" stroke-width="1.5" stroke-dasharray="3 2"/>
+                <text x="30" y="185" font-size="9" fill="var(--muted)">Two balloons advance scope</text>
+              </svg>
+              <p style="font-size:0.72rem;color:var(--muted);margin-top:0.5rem;">Deep small bowel access</p>
+            </div>
+            <div class="pi-col">
+              <h4>What is it?</h4>
+              <p>Double Balloon Enteroscopy (DBE) is a specialised technique to examine and treat the small bowel, which is not accessible by standard endoscopy. Two balloons accordion the small intestine over the scope, allowing deep insertion and therapy.</p>
+              <h4>Common Indications</h4>
+              <ul>
+                <li>Unexplained gastrointestinal bleeding</li>
+                <li>Small bowel tumours or polyps</li>
+                <li>Crohn's disease assessment and treatment</li>
+                <li>Abnormal capsule endoscopy findings</li>
+                <li>Small bowel stricture dilation</li>
+              </ul>
+            </div>
+            <div class="pi-col pi-risks">
+              <h4>Risks</h4>
+              <ul>
+                <li>Perforation (higher risk than standard endoscopy, ~0.3–0.8%)</li>
+                <li>Bleeding</li>
+                <li>Pancreatitis (retrograde/oral approach, ~0.3%)</li>
+                <li>Prolonged procedure requiring deeper sedation or general anaesthesia</li>
+                <li>Abdominal discomfort or bloating after the procedure</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- GALLERY -->
   <section id="gallery" class="tab-section">
     <div class="container">
@@ -801,7 +1251,83 @@
     <p>© 2026 Dr Hardesh Dhillon · Interventional Gastroenterologist</p>
   </footer>
 
+  <!-- PATIENT INFO MODAL -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="modal-label">Patient Information</div>
+      <h3 id="modalTitle"></h3>
+      <div class="modal-section">
+        <h4>What is it?</h4>
+        <p id="modalWhat"></p>
+      </div>
+      <div class="modal-section">
+        <h4>Common Indications</h4>
+        <ul id="modalIndications"></ul>
+      </div>
+    </div>
+  </div>
+
   <script>
+    const procedures = {
+      gastro: {
+        title: 'Gastroscopy & Colonoscopy',
+        what: 'Gastroscopy uses a thin flexible camera to examine the upper digestive tract including the oesophagus, stomach, and duodenum. Colonoscopy examines the large bowel (colon and rectum). Both are performed under sedation and are safe, well-tolerated procedures.',
+        indications: ['Heartburn, reflux or indigestion', 'Difficulty swallowing', 'Abdominal pain or bloating', 'Unexplained iron deficiency or anaemia', 'Rectal bleeding or change in bowel habits', 'Bowel cancer screening and surveillance', 'Polyp detection and removal']
+      },
+      emr: {
+        title: 'Endoscopic Mucosal Resection (EMR)',
+        what: 'EMR is a minimally invasive technique to remove larger polyps or early cancers from the lining of the digestive tract without surgery. Fluid is injected beneath the lesion to lift it, then a snare is used to remove it.',
+        indications: ['Large bowel polyps not removable by standard techniques', 'Early colorectal cancer', "Barrett's oesophagus with dysplasia", 'Early gastric lesions', 'Flat or sessile polyps']
+      },
+      esd: {
+        title: 'Endoscopic Submucosal Dissection (ESD)',
+        what: 'ESD is an advanced endoscopic technique that allows removal of large or complex lesions in one piece (en bloc) from the digestive tract wall. Specialised electrosurgical knives are used to dissect beneath the lesion, allowing precise removal while preserving surrounding tissue.',
+        indications: ['Early gastric cancer', 'Early colorectal cancer', 'Large or fibrotic polyps not suitable for EMR', 'Early oesophageal lesions', 'Lesions requiring en bloc resection for accurate pathology']
+      },
+      eus: {
+        title: 'Endoscopic Ultrasound (EUS)',
+        what: 'EUS combines endoscopy with high-frequency ultrasound to produce detailed images of the digestive tract and nearby structures including the pancreas, bile ducts, liver, and lymph nodes. It can also be used to perform guided biopsies (FNA/FNB).',
+        indications: ['Pancreatic cysts and masses', 'Bile duct stones', 'Submucosal tumours', 'Lymph node assessment', 'Staging of gastrointestinal cancers', 'Evaluation of unexplained abdominal pain']
+      },
+      ercp: {
+        title: 'ERCP',
+        what: 'Endoscopic Retrograde Cholangiopancreatography (ERCP) is a procedure combining endoscopy and fluoroscopic X-ray to diagnose and treat conditions of the bile ducts and pancreatic duct. It allows removal of stones, placement of stents, and treatment of blockages without open surgery.',
+        indications: ['Bile duct stones causing jaundice or pancreatitis', 'Biliary obstruction or stricture', 'Unexplained jaundice', 'Bile duct stent placement', 'Post-surgical bile duct complications', 'Chronic pancreatitis with duct dilation']
+      },
+      ftr: {
+        title: 'Full Thickness Resection',
+        what: 'Full Thickness Resection (FTR) removes all layers of the bowel wall to treat lesions that cannot be safely removed by conventional techniques. A specialised over-the-scope device (FTRD) is used, which clips and resects the lesion in one step.',
+        indications: ['Difficult polyps at previous resection sites with scarring', 'Submucosal tumours', 'Appendiceal orifice lesions', 'Non-lifting polyps after prior EMR', 'T1 colorectal cancers in select cases']
+      },
+      dbe: {
+        title: 'Double Balloon Enteroscopy',
+        what: 'Double Balloon Enteroscopy (DBE) is a specialised technique to examine and treat the small bowel, which is not accessible by standard endoscopy. Two balloons are used to accordion the small intestine over the endoscope, allowing deep insertion.',
+        indications: ['Unexplained gastrointestinal bleeding', 'Small bowel tumours or polyps', "Crohn's disease assessment and treatment", 'Abnormal capsule endoscopy findings requiring biopsy or therapy', 'Small bowel stricture dilation']
+      }
+    };
+
+    function openModal(id) {
+      const p = procedures[id];
+      document.getElementById('modalTitle').textContent = p.title;
+      document.getElementById('modalWhat').textContent = p.what;
+      const ul = document.getElementById('modalIndications');
+      ul.innerHTML = p.indications.map(i => `<li>${i}</li>`).join('');
+      document.getElementById('modalOverlay').classList.add('open');
+    }
+
+    function closeModal(e) {
+      if (!e || e.target === document.getElementById('modalOverlay') || e.target.classList.contains('modal-close')) {
+        document.getElementById('modalOverlay').classList.remove('open');
+      }
+    }
+    function togglePI(header) {
+      const body = header.nextElementSibling;
+      const isOpen = header.classList.contains('open');
+      document.querySelectorAll('.pi-header').forEach(h => { h.classList.remove('open'); h.nextElementSibling.classList.remove('open'); });
+      if (!isOpen) { header.classList.add('open'); body.classList.add('open'); }
+    }
+
     function showTab(id) {
       document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
       document.querySelectorAll('nav ul a').forEach(a => a.classList.remove('active'));
